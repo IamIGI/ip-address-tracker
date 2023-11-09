@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import SearchForm from '$lib/components/SearchForm.svelte';
+	import geoLocation from '$lib/stores/geoLocation';
+
+	const getStore = () => {
+		console.log($geoLocation);
+	};
+</script>
+
+<button on:click={getStore}>getStore</button>
+<SearchForm />
