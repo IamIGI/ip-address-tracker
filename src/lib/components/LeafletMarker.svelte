@@ -1,0 +1,55 @@
+<script lang="ts">
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import L from 'leaflet';
+
+	export let width: number;
+	export let height: number;
+	export let latLng: L.LatLngExpression;
+
+	$: console.log(latLng);
+	let marker: L.Marker | undefined;
+	let markerElement: HTMLElement;
+	let icon: any;
+	const { getMap }: { getMap: () => L.Map | undefined } = getContext('map');
+	const map = getMap();
+
+	setContext('layer', {
+		// L.Marker inherits from L.Layer
+		getLayer: () => marker
+	});
+
+	onMount(() => {
+		if (map) {
+			icon = L.divIcon({
+				html: markerElement,
+				className: 'map-marker',
+				iconSize: L.point(width, height)
+			});
+			marker = L.marker(latLng, { icon }).addTo(map);
+		}
+	});
+
+	$: latLng, updateMarker();
+
+	function updateMarker() {
+		if (map && latLng) {
+			icon = L.divIcon({
+				html: markerElement,
+				className: 'map-marker',
+				iconSize: L.point(width, height)
+			});
+			marker = L.marker(latLng, { icon }).addTo(map);
+		}
+	}
+
+	onDestroy(() => {
+		marker?.remove();
+		marker = undefined;
+	});
+</script>
+
+<div bind:this={markerElement}>
+	{#if marker}
+		<slot />
+	{/if}
+</div>
