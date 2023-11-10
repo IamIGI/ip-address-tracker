@@ -39,16 +39,16 @@
 	});
 </script>
 
-<h1>Map</h1>
-<div id="map-wrapper" bind:this={mapElement}>
+<div class="map-wrapper" bind:this={mapElement}>
 	{#if map}
 		<slot />
 	{/if}
 </div>
 
 <style lang="scss">
-	#map-wrapper {
-		height: 400px;
-		width: 400px;
+	.map-wrapper {
+		z-index: 1;
+		flex: 1;
+		width: 100%;
 	}
 </style>

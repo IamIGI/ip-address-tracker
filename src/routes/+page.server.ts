@@ -13,19 +13,12 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const ip = data.get('ip_address') as string;
 
-		geoLocation.subscribe((geo) => {
-			console.log(geo);
-		});
-		console.log('----------------------------PASS------------------------------');
 		const response = await fetch(`${API_URL_IP_GEO}?apiKey=${PRIVATE_IP_GEO_KEY}&ipAddress=${ip}`);
 
 		if (!response.ok) console.error(`Status: ${response.status}`, 'Could not fetch data');
 		const responseJSON = await response.json();
 		geoLocation.set(responseJSON);
 
-		geoLocation.subscribe((geo) => {
-			console.log(geo);
-		});
 		return responseJSON;
 	}
 };

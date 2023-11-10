@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import geoLocation from '$lib/stores/geoLocation';
-	import type { SubmitFunction } from '@sveltejs/kit';
+	import icon_arrow from '$assets/images/icon-arrow.svg';
 
 	let searchInput = '';
 
-	geoLocation.subscribe((geo) => {
-		console.log(geo);
-	});
 	const handleSubmit = async () => {
 		const baseURL = import.meta.env.VITE_API_URL_IP_GEO;
 		const api_key = import.meta.env.VITE_IP_GEO_KEY;
@@ -15,14 +11,72 @@
 		if (!response.ok) console.error(`Status: ${response.status}`, 'Could not fetch data');
 		const responseJSON = await response.json();
 		geoLocation.set(responseJSON);
-
-		console.log(responseJSON);
 	};
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-	<input type="text" name="ip_address" bind:value={searchInput} />
-	<button type="submit">Send </button>
-</form>
+<div class="wrapper">
+	<h1>IP Address Tracker</h1>
+	<form on:submit|preventDefault={handleSubmit}>
+		<input
+			type="text"
+			name="ip_address"
+			placeholder="Search for any IP address or domain"
+			bind:value={searchInput}
+		/>
+		<button type="submit"><img src={icon_arrow} alt="icon" /> </button>
+	</form>
+</div>
 
-<p>{$geoLocation?.location.country}</p>
+<style lang="scss">
+	.wrapper {
+		width: 100%;
+		height: 280px;
+		padding-top: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 20px;
+		background-image: url('src/lib/assets/images/pattern-bg-desktop.png');
+
+		h1 {
+			margin: 0px;
+			color: white;
+		}
+
+		form {
+			display: flex;
+			width: 100%;
+			justify-content: center;
+			input {
+				height: 50px;
+				width: 460px;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				cursor: pointer;
+				border: none;
+				padding-left: 15px;
+				font-size: var(--font-size-input);
+
+				&:focus {
+					border: none;
+					outline: none;
+				}
+			}
+
+			button {
+				background-color: var(--color-very-dark-grey);
+				color: white;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				padding: 0 20px;
+				cursor: pointer;
+				border: none;
+
+				&:hover {
+					background-color: var(--color-dark-gray);
+				}
+			}
+		}
+	}
+</style>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Information from '$components/Information.svelte';
 	import LeafletMap from '$lib/components/LeafletMap.svelte';
 	import LeafletMarker from '$lib/components/LeafletMarker.svelte';
 	import SearchForm from '$lib/components/SearchForm.svelte';
@@ -9,14 +10,13 @@
 
 	geoLocation.subscribe((geo) => {
 		if (geo?.location.lat && geo?.location.lng) {
-			console.log(geo?.location.lat, geo?.location.lng);
 			markerLocation = [geo?.location.lat, geo?.location.lng];
-			console.log(markerLocation);
 		}
 	});
 </script>
 
 <SearchForm />
+<Information />
 <LeafletMap view={markerLocation} zoom={5}>
 	<LeafletMarker latLng={markerLocation} width={40} height={40}>
 		<svg xmlns="http://www.w3.org/2000/svg" width="46" height="56"
