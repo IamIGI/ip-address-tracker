@@ -6,7 +6,6 @@
 	export let height: number;
 	export let latLng: L.LatLngExpression;
 
-	$: console.log(latLng);
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
 	let icon: any;
