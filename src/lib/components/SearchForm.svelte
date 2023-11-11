@@ -37,7 +37,7 @@
 		justify-content: flex-start;
 		align-items: center;
 		gap: 20px;
-		background-image: url('src/lib/assets/images/pattern-bg-desktop.png');
+		background-image: url('$assets/images/pattern-bg-desktop.png');
 
 		h1 {
 			margin: 0px;
@@ -88,6 +88,8 @@
 
 	@media screen and (max-width: 635px) {
 		.wrapper {
+			/* height: 350px; */
+			/* background-image: url('$assets/images/pattern-bg-mobile.png'); */
 			h1 {
 				font-size: 25px;
 			}
@@ -96,6 +98,13 @@
 					width: 200px;
 				}
 			}
+		}
+	}
+
+	@media screen and (max-width: 375px) {
+		.wrapper {
+			height: 300px;
+			background-image: url('$assets/images/pattern-bg-mobile.png');
 		}
 	}
 </style>
