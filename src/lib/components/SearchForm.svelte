@@ -79,4 +79,23 @@
 			}
 		}
 	}
+
+	@media screen and (max-width: 800px) {
+		.wrapper {
+			height: 230px;
+		}
+	}
+
+	@media screen and (max-width: 635px) {
+		.wrapper {
+			h1 {
+				font-size: 25px;
+			}
+			form {
+				input {
+					width: 200px;
+				}
+			}
+		}
+	}
 </style>
